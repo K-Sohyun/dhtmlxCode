@@ -1,0 +1,182 @@
+[
+    {
+        "id": 1,
+        "menuName": "일정 관리",
+        "menuOrder": "1",
+        "viewId": "scheduler",
+        "isActive": "Y",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 2,
+        "menuName": "메뉴 관리",
+        "menuOrder": "2",
+        "viewId": "menuMng",
+        "isActive": "Y",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 3,
+        "menuName": "테스트",
+        "menuOrder": "3",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 4,
+        "menuName": "테스트",
+        "menuOrder": "4",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 5,
+        "menuName": "테스트",
+        "menuOrder": "5",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 6,
+        "menuName": "테스트",
+        "menuOrder": "6",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 7,
+        "menuName": "테스트",
+        "menuOrder": "7",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 8,
+        "menuName": "테스트",
+        "menuOrder": "8",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 9,
+        "menuName": "테스트",
+        "menuOrder": "9",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 10,
+        "menuName": "테스트",
+        "menuOrder": "10",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-05",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 11,
+        "menuName": "테스트",
+        "menuOrder": "11",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 12,
+        "menuName": "테스트",
+        "menuOrder": "12",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 13,
+        "menuName": "테스트",
+        "menuOrder": "13",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 14,
+        "menuName": "테스트",
+        "menuOrder": "14",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 15,
+        "menuName": "테스트",
+        "menuOrder": "15",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 16,
+        "menuName": "테스트",
+        "menuOrder": "16",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 17,
+        "menuName": "테스트",
+        "menuOrder": "17",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 18,
+        "menuName": "테스트",
+        "menuOrder": "18",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 19,
+        "menuName": "테스트",
+        "menuOrder": "19",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    },
+    {
+        "id": 20,
+        "menuName": "테스트",
+        "menuOrder": "20",
+        "viewId": "test",
+        "isActive": "N",
+        "createDate": "2025-02-06",
+        "deleteMenu": "<button class='comBtn'>삭제</button>"
+    }
+]

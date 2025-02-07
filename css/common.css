@@ -1,0 +1,142 @@
+:root {
+    --dhx-color-primary: #84b73f;
+    --dhx-color-primary-hover: #5e9b36;
+    --dhx-color-primary-light-hover: #eef5e5;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+*::after,
+*::before {  
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Pretendard', Arial, Tahoma, Verdana, sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.2;
+}
+
+button {
+    border: 0;
+    border-radius: 4px;
+    background: none;
+    cursor: pointer;
+    font-family: 'Pretendard', Arial, Tahoma, Verdana, sans-serif;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* 공통 CSS */
+.mgNo {
+    margin: 0 !important;
+}
+
+.mgAuto {
+    margin: 0 auto;
+}
+
+.mgB10 {
+    margin-bottom: 10px;
+}
+
+.comBtn {
+    color: #fff;
+    padding: 6px 12px;
+    background: #3d3d3d;
+    font-size: 14px;
+}
+
+.comBtn--modal {
+    display: block;
+    margin-left: auto;
+    padding: 12px 24px;
+    font-size: 15px;
+    background-color: var(--dhx-color-primary);
+    transition: 0.3s;
+}
+
+.comBtn--modal:hover {
+    background-color: var(--dhx-color-primary-hover);
+}
+
+/* 레이아웃 CSS */
+#contentTitle {
+    font-size: 30px;
+    font-weight: 600;
+    padding-bottom: 15px;
+}
+
+#layoutContainer {
+    display: flex;
+    height: calc(100vh - 50px);
+    overflow: hidden;
+}
+
+#sidebarArea .logo {
+    text-align: center;
+    padding: 10px 0;
+}
+
+#sidebarArea .logo img {
+    max-width: 80%;
+}
+
+#contentArea {
+    width: calc(100% - 200px);
+    padding: 50px 30px 30px;
+    overflow-y: auto;
+}
+
+#ft {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    background-color: #3a3b3d;
+    color: #fff;
+}
+
+/* 일정 관리 CSS */
+#schedulerBox {
+    display: flex;
+}
+
+#schedulerBox .formBox {
+    padding: 10px 0 10px 20px !important;
+}
+
+/* DHTMLX CSS */
+.modal-title .dhx_navbar-title {
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.over-visible .dhx_grid-body {
+    overflow: visible;
+}
+
+.grid-center .dhx_grid-body * {
+    justify-content: center;
+}
+
+.dhx_sidebar {
+    border: 0;
+    background: #f7f7f7;
+}
+
+.dhx_pagination_box {
+    margin-top: 20px;
+}
+
+.dhx_pagination {
+    border: 0;
+}

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daon Plan</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/suite.css?v=9.0.4">
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="text/javascript" src="../js/suite.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+	<!-- custom icon -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.css?v=6.4.2" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="layoutContainer">
+		<section id="sidebarArea"></section>
+		<section id="contentArea">
+			<h2 id="contentTitle">메뉴 관리</h2>
+			<div id="menuMngBox">
+				<button class="comBtn comBtn--modal mgB10" onclick="dhxWindow.show()">메뉴 등록</button>
+			</div>
+		</section>
+	</div>
+	<footer id="ft">
+		<p>Copyright ⓒ 2025 Daonlink, Inc. All Rights Reserved.</p>
+	</footer>
+
+	<script>
+		// 변수 정의
+		let sidebarArea;
+		let contentArea;
+		let menuMngBox;
+		let menuMngGrid;
+		let menuMngForm;
+        let pagination;
+
+		// 사이드바
+		sidebarArea = new dhx.Sidebar("sidebarArea", {
+			css: "dhx_widget--bordered",
+		});
+
+		sidebarArea.data.load("../js/sidebarData.json")
+		    .then(function () {
+                sidebarArea.data.add({
+                    id: "toggle",
+                    css: "toggle-button",
+                    icon: "mdi mdi-backburger",
+                }, sidebarArea.data.getIndex("scheduler"));
+
+                sidebarArea.data.add({
+                    type: "customHTML",
+                    id: "logo",
+                    css: "logo-box",
+                    html: "<h1 class='logo'><img src='../img/logo.png' alt='Daon Plan' /></h1>",
+                }, sidebarArea.data.getIndex("scheduler"));
+            });
+
+		sidebarArea.events.on("click", function (id) {
+			if (id === "toggle") {
+				const toggleItem = sidebarArea.data.getItem("toggle");
+				sidebarArea.toggle();
+
+				if (sidebarArea.config.collapsed) {
+					toggleItem.icon = "mdi mdi-menu";
+				} else {
+					toggleItem.icon = "mdi mdi-backburger";
+				}
+
+				// 사이드바 상태에 따른 콘텐츠 너비 변경
+				requestAnimationFrame(() => {
+					let sideWidth = document.querySelector('.dhx_sidebar').offsetWidth;
+					let contentEl = document.getElementById('contentArea');
+
+					contentEl.style.width = `calc(100% - ${sideWidth}px)`;
+				});
+			} else { // 메뉴 클릭
+				let menuId = sidebarArea.data.getItem(id);
+				if(menuId.link) {
+					window.location.href = menuId.link; // 링크로 이동
+				}
+			}
+		});
+
+		menuMngBox = new dhx.Layout("menuMngBox", {
+			type: "none",
+			rows: [
+				{ id: "menuMngGrid", height: 640 },
+                { id: "pagination", css: "dhx_pagination_box" }
+			]
+		});
+
+        menuMngGrid = new dhx.Grid("menuMngGrid", {
+            css: "grid-center over-visible",
+            columns: [
+                { width: "10%", id: "id", header: "No" },
+                { width: "20%", id: "menuName", header: "메뉴명" },
+                { width: "10%", id: "menuOrder", header: "메뉴 정렬" },
+                { width: "20%", id: "viewId", header: "화면 ID" },
+                { width: "10%", id: "isActive", header: "사용 여부" },
+                { width: "20%", id: "createDate", header: "생성일" },
+				{ width: "10%", id: "deleteMenu", header: "삭제", htmlEnable: true, tooltip: false }
+            ]
+        });
+
+        menuMngGrid.data.load("../js/menuMngData.json")
+
+		pagination = new dhx.Pagination("pagination", {
+			css: "dhx_widget--bordered dhx_widget--no-border_top",
+			data: menuMngGrid.data,
+			pageSize: 15 // 한 페이지에 15개 표시
+		});
+
+		menuMngForm = new dhx.Form(null, {
+			css: "mgAuto",
+			width: "50%",
+			rows: [
+				{ type: "input", name: "menuName", label: "메뉴명" },
+				{ type: "input", name: "menuOrder", label: "메뉴 정렬" },
+				{ type: "input", name: "viewId", label: "화면 ID" },
+				{ type: "input", name: "isActive", label: "사용 여부" },
+				{ type: "button", name: "addMenu", text: "등록", size: "auto", css: "mgAuto" }
+			]
+		});
+
+		// 등록 버튼 클릭 시 그리드에 추가
+		menuMngForm.getItem("addMenu").events.on("click", function () {
+			const values = menuMngForm.getValue();
+			if (values.menuName && values.menuOrder && values.viewId && values.isActive) {
+
+				// 오늘 날짜 자동 설정
+				const today = new Date();
+        		const formattedDate = today.toISOString().split('T')[0]; // YYYY-MM-DD 형식
+
+				menuMngGrid.data.add({
+					id: menuMngGrid.data.getLength() + 1,
+					menuName: values.menuName,
+					menuOrder: values.menuOrder,
+					viewId: values.viewId,
+					isActive: values.isActive,
+					createDate: formattedDate,
+					deleteMenu: '<button class="comBtn">삭제</button>'
+				});
+				
+				menuMngForm.clear();
+			}
+		});
+
+		menuMngGrid.events.on("cellClick", function (row, col, e) {
+			if (col.id === "deleteMenu") {
+				menuMngGrid.data.remove(row.id);
+			}
+		});
+
+
+		// 메뉴등록 모달
+		const dhxWindow = new dhx.Window({
+			width: 800,
+			height: 480,
+			title: "메뉴 등록",
+			css: "modal-title",
+			modal: true
+		});
+
+		dhxWindow.attach(menuMngForm); // 입력폼 모달에 추가
+	</script>
+</body>
+</html>

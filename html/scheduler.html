@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daon Plan</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+	<link rel="stylesheet" href="../css/suite.css?v=9.0.4">
+    <link rel="stylesheet" href="../css/common.css">
+    <script type="text/javascript" src="../js/suite.js"></script>
+    <script type="text/javascript" src="../js/common.js"></script>
+	<!-- custom icon -->
+	<link href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/4.4.95/css/materialdesignicons.css?v=6.4.2" media="all" rel="stylesheet" type="text/css">
+</head>
+<body>
+	<div id="layoutContainer">
+		<section id="sidebarArea"></section>
+		<section id="contentArea">
+			<h2 id="contentTitle">일정 관리</h2>
+			<div id="schedulerBox"></div>
+		</section>
+	</div>
+	<footer id="ft">
+		<p>Copyright ⓒ 2025 Daonlink, Inc. All Rights Reserved.</p>
+	</footer>
+
+	<script>
+		// 변수 정의
+		let sidebarArea;
+		let contentArea;
+		let schedulerBox;
+		let schedulerGrid;
+		let schedulerForm;
+
+		// 사이드바
+		sidebarArea = new dhx.Sidebar("sidebarArea", {
+			css: "dhx_widget--bordered",
+		});
+
+		sidebarArea.data.load("../js/sidebarData.json")
+		.then(function () {
+			sidebarArea.data.add({
+				id: "toggle",
+				css: "toggle-button",
+				icon: "mdi mdi-backburger",
+			}, sidebarArea.data.getIndex("scheduler"));
+
+			sidebarArea.data.add({
+				type: "customHTML",
+				id: "logo",
+				css: "logo-box",
+				html: "<h1 class='logo'><img src='../img/logo.png' alt='Daon Plan' /></h1>",
+			}, sidebarArea.data.getIndex("scheduler"));
+		});
+
+		sidebarArea.events.on("click", function (id) {
+			if (id === "toggle") {
+				const toggleItem = sidebarArea.data.getItem("toggle");
+				sidebarArea.toggle();
+
+				if (sidebarArea.config.collapsed) {
+					toggleItem.icon = "mdi mdi-menu";
+				} else {
+					toggleItem.icon = "mdi mdi-backburger";
+				}
+
+				// 사이드바 상태에 따른 콘텐츠 너비 변경
+				requestAnimationFrame(() => {
+					let sideWidth = document.querySelector('.dhx_sidebar').offsetWidth;
+					let contentEl = document.getElementById('contentArea');
+
+					contentEl.style.width = `calc(100% - ${sideWidth}px)`;
+				});
+			} else { // 메뉴 클릭
+				let menuId = sidebarArea.data.getItem(id);
+				if(menuId.link) {
+					window.location.href = menuId.link; // 링크로 이동
+				}
+			}
+		});
+
+		schedulerBox = new dhx.Layout("schedulerBox", {
+			type: "none",
+			cols: [
+				{ id: "schedulerGrid", width: "70%" },
+				{ id: "schedulerForm", width: "30%" },
+			]
+		});
+
+		schedulerGrid = new dhx.Grid("schedulerGrid", {
+			height: 600,
+			css: "grid-center",
+			columns: [
+				{ id: "id", header: "ID", width: "10%" },
+				{ id: "event", header: "일정", width: "55%", editorType: "input" },
+				{ id: "date", header: "날짜", width: "20%", editorType: "date" },
+				{ id: "delete", header: "삭제", width: "15%", htmlEnable: true, tooltip: false }
+			],
+			data: [
+				{ id: 1, event: "다온 연구소 회의", date: "2025-02-04", delete: '<button class="comBtn">삭제</button>' },
+				{ id: 2, event: "DHTMLX 실습 플랜 구상 (DHTMLX 실습 후 React 진행)", date: "2025-02-05", delete: '<button class="comBtn">삭제</button>' },
+				{ id: 3, event: "DHTMLX 실습 진행", date: "2025-02-06", delete: '<button class="comBtn">삭제</button>' },
+				{ id: 4, event: "DHTMLX 실습 내용 정리", date: "2025-02-07", delete: '<button class="comBtn">삭제</button>' }
+			],
+			editable: true
+		});
+
+		schedulerForm = new dhx.Form("schedulerForm", {
+			css: "formBox",
+			rows: [
+				{ type: "input", name: "event", label: "일정" },
+				{ type: "datepicker", name: "date", label: "날짜", dateFormat: "%Y-%m-%d" },
+				{ type: "button", name: "add", text: "등록", size: "medium" }
+			]
+		});
+
+		// 등록 버튼 클릭 시 그리드에 일정 추가
+		schedulerForm.getItem("add").events.on("click", function () {
+			const values = schedulerForm.getValue();
+			if (values.event && values.date) {
+				schedulerGrid.data.add({
+					id: schedulerGrid.data.getLength() + 1,
+					event: values.event,
+					date: values.date,
+					delete: '<button class="comBtn">삭제</button>'
+				});
+				schedulerForm.clear();
+			}
+		});
+
+		schedulerGrid.events.on("cellClick", function (row, col, e) {
+			if (col.id === "delete") {
+				schedulerGrid.data.remove(row.id);
+			}
+		});
+	</script>
+</body>
+</html>

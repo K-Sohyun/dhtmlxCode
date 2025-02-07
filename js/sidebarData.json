@@ -1,0 +1,14 @@
+[
+    {
+        "id": "scheduler",
+        "value": "일정 관리",
+        "icon": "mdi mdi-view-dashboard",
+        "link": "../html/scheduler.html?page=scheduler"
+    },
+    {
+        "id": "menuMng",
+        "value": "메뉴 관리",
+        "icon": "mdi mdi-square-edit-outline",
+        "link": "../html/menuMng.html?page=menuMng"
+    }
+]
